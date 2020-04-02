@@ -1,0 +1,69 @@
+C#企业级开发技术练习5答题卡
+
+班级：     李明杰
+姓名：     信管一班
+学号：     20190307130
+
+注：请将答案放置在序号下方。*/
+
+（一）
+ public class UserSys
+    {
+        public delegate void Dlogin(object o, int n);
+        Dlogin _elogin;
+        public event Dlogin Elogin
+        {
+            add
+            { _elogin += value; }
+            remove
+            { _elogin -= value; }
+        }
+        int n = 10000;
+        public void login()
+        {
+            _elogin(this, ++n);
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            UserSys user = new UserSys();
+            user.Elogin += (o, n) => Console.WriteLine($"{n}登录{o}成功");
+            user.login();
+            user.login();
+            user.login();
+        }
+    }
+
+（二）
+ static void Main(string[] args)
+        {
+            string strl = "C#,java,python,golang,javascript,PHP,VB";
+            string[] str2 = strl.Split(',');
+            Array.Sort(str2 , (a, b) => string.Compare(b.ToString(), a.ToString()));
+            string str3 = string.Join(",", str2);
+            string s = "";
+            foreach (var i in str2)
+                s += i.ToString();
+            Console.WriteLine(str3);
+        }
+
+（三）
+static void Main(string[] args)
+        {
+            MathSys math = new MathSys();
+            math.EFilter += num =>
+              {
+
+                  int[] pass = Array.FindAll(num, p => p%2==0)                            ;
+                                
+
+                  int[] ecen = num;
+                  Console.WriteLine("数组中的偶数如下:");
+                  foreach (int i in pass)
+
+                      Console.WriteLine(i);
+              };
+            math.filter(new[] { 10, 8, 7, 21, 24 });
+        }
